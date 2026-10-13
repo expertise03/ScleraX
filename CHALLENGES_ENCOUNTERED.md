@@ -1,7 +1,9 @@
-# VALENS — The Challenges We Ran Into
+# ScleraX — The Challenges We Ran Into
 
-> **Project**: VALENS — Security Operations. Deception. Intelligence  
-> **Team**: Harkirat Singh, Shaikh Arman  
+> **Project**: ScleraX — Security Operations. Deception. Intelligence
+> **Author**: Harini P
+> **Department**: Artificial Intelligence and Data Science
+> **Institution**: Sri Manakula Vinayagar Engineering College
 > **What this document is**: A simple, honest, and non-technical look at the real hurdles we hit while building this project and how we solved them.
 
 ---

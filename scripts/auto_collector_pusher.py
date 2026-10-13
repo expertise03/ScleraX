@@ -1,7 +1,7 @@
 """
 auto_collector_pusher_v3.py
 Pushes remaining collector files quickly — 7 files, ~7 min apart, done by 20:00 IST.
-Authored by Harkirat Singh <harkiratsingh96kk@gmail.com> & Shaikh Arman <shaikharmanmukhtar125@gmail.com>
+Authored by Harini P <harini.pazhani03@gmail.com>
 """
 
 import subprocess
@@ -15,10 +15,10 @@ from datetime import datetime, timezone, timedelta
 IST = timezone(timedelta(hours=5, minutes=30))
 DEADLINE = datetime.now(IST).replace(hour=20, minute=0, second=0, microsecond=0)
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-HACKATHON_REMOTE_URL = "https://github.com/harkirat-data/CyberShield-AI-Hackathon.git"
+HACKATHON_REMOTE_URL = "https://github.com/expertise03/ScleraX.git"
 
-AUTHOR = "Harkirat Singh"
-EMAIL  = "harkiratsingh96kk@gmail.com"
+AUTHOR = "Harini P"
+EMAIL  = "harini.pazhani03@gmail.com"
 
 COMMITS = [
     (
@@ -104,7 +104,7 @@ def main():
     # Spread evenly with 3-min buffer — minimum 60s, max 600s
     interval = max(60, min(600, (secs_left - 180) / max(total - 1, 1)))
 
-    print(f"VALENS -- Collector Fast Pusher v3")
+    print(f"ScleraX -- Collector Fast Pusher v3")
     print(f"Author   : {AUTHOR} <{EMAIL}>")
     print(f"Remaining: {total} files")
     print(f"Interval : {interval/60:.1f} min")

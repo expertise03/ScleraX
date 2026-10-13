@@ -216,12 +216,12 @@ def create_app():
         print("FastAPI not installed. Run: pip install fastapi uvicorn")
         return None
 
-    app = FastAPI(title="VALENS Orchestrator", version="1.0")
+    app = FastAPI(title="ScleraX Orchestrator", version="1.0")
     orch = Orchestrator(use_rag=True, use_llm=True)
 
     @app.get("/health")
     def health():
-        return {"status": "ok", "service": "valens-ai"}
+        return {"status": "ok", "service": "ScleraX-ai"}
 
     @app.post("/api/v1/investigate")
     def investigate(event: Dict):

@@ -1,7 +1,9 @@
 # Judge Briefing — Feature 1: Honeypot Decoy Telemetry Models
 
 > **Commit Scope**: `honeypot/__init__.py`, `honeypot/models.py`  
-> **Author**: Harkirat Singh  
+> **Author**: Harini P
+> **Department**: Artificial Intelligence and Data Science
+> **Institution**: Sri Manakula Vinayagar Engineering College
 > **Topic**: Forensic Data Contracts & Real-Time Telemetry Normalization
 
 ---

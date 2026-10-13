@@ -1,8 +1,8 @@
-# VALENS Threat Model & Attack Surface Matrix
+# ScleraX Threat Model & Attack Surface Matrix
 
 ## Overview
 
-This threat model outlines the STRIDE categorization and defensive mitigation architecture utilized by VALENS to safeguard infrastructure from external automated scanners, credential stuffers, and sophisticated lateral movement.
+This threat model outlines the STRIDE categorization and defensive mitigation architecture utilized by ScleraX to safeguard infrastructure from external automated scanners, credential stuffers, and sophisticated lateral movement.
 
 ---
 
@@ -19,7 +19,7 @@ This threat model outlines the STRIDE categorization and defensive mitigation ar
 
 ## 2. STRIDE Threat Analysis
 
-| Threat Category | Target Component | Attack Vector | VALENS Mitigation |
+| Threat Category | Target Component | Attack Vector | ScleraX Mitigation |
 | :--- | :--- | :--- | :--- |
 | **Spoofing** | Edge WAF / Listeners | IP address spoofing, forged headers | Cryptographic client fingerprinting & TCP window analysis |
 | **Tampering** | Decoy Configuration | Modifying honeypot parameters | Immutable runtime environment with signed hashes |

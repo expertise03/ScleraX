@@ -1,4 +1,4 @@
-"""Unit tests for VALENS Deception Mesh listeners and Canary tokens.
+"""Unit tests for ScleraX Deception Mesh listeners and Canary tokens.
 """
 
 import unittest

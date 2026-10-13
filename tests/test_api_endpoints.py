@@ -1,4 +1,4 @@
-"""Unit tests for VALENS REST API payload serialization and status responses.
+"""Unit tests for ScleraX REST API payload serialization and status responses.
 """
 
 import unittest

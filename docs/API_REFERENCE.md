@@ -1,4 +1,4 @@
-# VALENS REST & WebSocket Telemetry API Reference
+# ScleraX REST & WebSocket Telemetry API Reference
 
 ## Base URL
 - **Local Dev**: `http://127.0.0.1:8050`

@@ -1,4 +1,4 @@
-"""Run the VALENS deception grid as a standalone process."""
+"""Run the ScleraX deception grid as a standalone process."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ async def serve() -> None:
     settings = HoneypotSettings.from_env()
     runtime = HoneypotRuntime(settings=settings)
     status = await runtime.start()
-    print("VALENS Deception Grid")
+    print("ScleraX Deception Grid")
     print(json.dumps(status, indent=2))
     print("Press Ctrl+C to stop.")
     try:
@@ -26,7 +26,7 @@ def main() -> None:
     try:
         asyncio.run(serve())
     except KeyboardInterrupt:
-        print("\nVALENS deception grid stopped.")
+        print("\nScleraX deception grid stopped.")
 
 
 if __name__ == "__main__":

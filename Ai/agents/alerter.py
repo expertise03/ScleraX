@@ -1,5 +1,5 @@
 """
-alerter.py - Modular security alerting layer for VALENS.
+alerter.py - Modular security alerting layer for ScleraX.
 
 Dispatches security alerts to Slack, Discord, and Email (SMTP) when high-risk
 or critical security incidents are detected.
@@ -20,7 +20,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from typing import Any, Dict, List, Optional
 
-logger = logging.getLogger("valens.alerter")
+logger = logging.getLogger("ScleraX.alerter")
 
 
 SEVERITY_RANKS: Dict[str, int] = {
@@ -171,7 +171,7 @@ class SlackAlerter:
                 "type": "header",
                 "text": {
                     "type": "plain_text",
-                    "text": f"{emoji} [VALENS] {sev} Security Incident Detected",
+                    "text": f"{emoji} [ScleraX] {sev} Security Incident Detected",
                     "emoji": True,
                 },
             },
@@ -211,7 +211,7 @@ class SlackAlerter:
             },
         ]
 
-        return {"blocks": blocks, "text": f"[{sev}] VALENS Incident: {alert.event_type} (Score: {alert.risk_score})"}
+        return {"blocks": blocks, "text": f"[{sev}] ScleraX Incident: {alert.event_type} (Score: {alert.risk_score})"}
 
     def send(self, alert: SecurityAlert) -> bool:
         """Send the alert to Slack. Returns True on success, False otherwise."""
@@ -279,7 +279,7 @@ class DiscordAlerter:
         )
 
         embed = {
-            "title": f"🚨 [VALENS] {sev} Incident Detected",
+            "title": f"🚨 [ScleraX] {sev} Incident Detected",
             "description": alert.ai_summary or "Suspicious activity requiring SOC attention.",
             "color": color,
             "fields": [
@@ -293,12 +293,12 @@ class DiscordAlerter:
                 {"name": "Recommended Remediation", "value": remediation_str, "inline": False},
             ],
             "footer": {
-                "text": f"Event ID: {alert.event_id} | VALENS SOC Engine",
+                "text": f"Event ID: {alert.event_id} | ScleraX SOC Engine",
             },
         }
 
         return {
-            "content": f"**[VALENS Alert]** {sev} Incident on `{alert.host}`",
+            "content": f"**[ScleraX Alert]** {sev} Incident on `{alert.host}`",
             "embeds": [embed],
         }
 
@@ -315,7 +315,7 @@ class DiscordAlerter:
             data=data,
             headers={
                 "Content-Type": "application/json",
-                "User-Agent": "VALENS-Alerter/1.0",
+                "User-Agent": "ScleraX-Alerter/1.0",
             },
             method="POST",
         )
@@ -495,7 +495,7 @@ class EmailAlerter:
     def from_email(self) -> str:
         if self._alert_from is not None:
             return self._alert_from
-        return os.environ.get("ALERT_EMAIL_FROM", "").strip() or self.user or "alerts@valens.ai"
+        return os.environ.get("ALERT_EMAIL_FROM", "").strip() or self.user or "alerts@ScleraX.ai"
 
     @property
     def webhook_url(self) -> str:
@@ -512,7 +512,7 @@ class EmailAlerter:
         Builds (subject, text_body, html_body).
         """
         sev = alert.severity.upper()
-        subject = f"[VALENS][{sev}] Security Incident Detected: {alert.event_type}"
+        subject = f"[ScleraX][{sev}] Security Incident Detected: {alert.event_type}"
 
         # Severity visual tokens
         sev_color_map = {
@@ -534,7 +534,7 @@ class EmailAlerter:
         ]
         remediation_html = "".join(remediation_items) or '<li style="margin-bottom: 6px; color: #14532d; font-size: 13px; line-height: 1.5;">Review host and network activity for anomalies.</li>'
 
-        text_body = f"""VALENS Security Incident Alert
+        text_body = f"""ScleraX Security Incident Alert
 ======================================================================
 Severity:       {sev}
 Risk Score:     {alert.risk_score}/100
@@ -554,7 +554,7 @@ Recommended Remediation:
 {remediation_lines}
 
 ======================================================================
-Generated automatically by VALENS Autonomous SOC Engine.
+Generated automatically by ScleraX Autonomous SOC Engine.
 """
 
         html_body = f"""<!DOCTYPE html>
@@ -563,7 +563,7 @@ Generated automatically by VALENS Autonomous SOC Engine.
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>[VALENS] Security Incident Alert</title>
+<title>[ScleraX] Security Incident Alert</title>
 <style>
   body {{ margin: 0; padding: 0; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }}
   table {{ border-collapse: collapse; }}
@@ -593,7 +593,7 @@ Generated automatically by VALENS Autonomous SOC Engine.
         <div class="header-bar" style="height: 4px; background-color: {sev_style['bg']};"></div>
         <div class="content" style="padding: 24px;">
           <div class="title-row" style="margin-bottom: 16px; border-bottom: 1px solid #f1f5f9; padding-bottom: 16px;">
-            <h2 class="title" style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 10px 0;">[VALENS] Security Incident Alert</h2>
+            <h2 class="title" style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 10px 0;">[ScleraX] Security Incident Alert</h2>
             <span class="badge" style="display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 11px; background-color: {sev_style['bg']}; color: #ffffff; text-transform: uppercase; letter-spacing: 0.5px;">{sev}</span>
             <span class="pill" style="display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 12px; background-color: #f8fafc; color: #334155; border: 1px solid #e2e8f0; margin-left: 8px;">Risk Score: <strong style="color: #0f172a;">{alert.risk_score}/100</strong></span>
           </div>
@@ -635,7 +635,7 @@ Generated automatically by VALENS Autonomous SOC Engine.
         </div>
 
         <div class="footer" style="padding: 16px 24px; background-color: #f8fafc; border-top: 1px solid #f1f5f9; text-align: center; font-size: 11px; color: #64748b; line-height: 1.5;">
-          VALENS Autonomous SOC &bull; Automated Telemetry Notification<br>
+          ScleraX Autonomous SOC &bull; Automated Telemetry Notification<br>
           <span style="color: #94a3b8;">Generated automatically from real-time endpoint and network sensor analysis.</span>
         </div>
       </div>
@@ -688,7 +688,7 @@ Generated automatically by VALENS Autonomous SOC Engine.
                 req = urllib.request.Request(
                     self.webhook_url,
                     data=data,
-                    headers={"Content-Type": "application/json", "User-Agent": "VALENS-EmailAlerter/1.0"},
+                    headers={"Content-Type": "application/json", "User-Agent": "ScleraX-EmailAlerter/1.0"},
                     method="POST",
                 )
                 with urllib.request.urlopen(req, timeout=self.timeout) as resp:

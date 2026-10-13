@@ -1,8 +1,8 @@
 """
 auto_rag_pusher.py
-Progressively pushes the RAG Knowledge Base and Vector Store to CyberShield-AI-Hackathon main.
+Progressively pushes the RAG Knowledge Base and Vector Store to ScleraX main.
 5 commits spaced across 15 minutes (~3.5 min apart).
-All commits authored by Harkirat Singh <harkiratsingh96kk@gmail.com>.
+All commits authored by Harini P <harini.pazhani03@gmail.com>.
 """
 
 import os
@@ -15,10 +15,10 @@ from datetime import datetime, timezone, timedelta
 
 IST = timezone(timedelta(hours=5, minutes=30))
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-HACKATHON_REMOTE_URL = "https://github.com/harkirat-data/CyberShield-AI-Hackathon.git"
+HACKATHON_REMOTE_URL = "https://github.com/expertise03/ScleraX.git"
 
-AUTHOR = "Harkirat Singh"
-EMAIL = "harkiratsingh96kk@gmail.com"
+AUTHOR = "Harini P"
+EMAIL = "harini.pazhani03@gmail.com"
 
 # 5 logical, progressive commits covering the full RAG knowledge base & vector store
 COMMIT_BATCHES = [
@@ -99,7 +99,7 @@ def main():
     total_commits = len(COMMIT_BATCHES)
     interval_secs = 210  # ~3.5 minutes between commits (total ~14-15 minutes)
 
-    print(f"[{now_ist_str()}] VALENS -- RAG Progressive Pusher")
+    print(f"[{now_ist_str()}] ScleraX -- RAG Progressive Pusher")
     print(f"Author  : {AUTHOR} <{EMAIL}>")
     print(f"Commits : {total_commits} batches")
     print(f"Interval: {interval_secs / 60:.1f} minutes")

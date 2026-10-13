@@ -1,14 +1,14 @@
 /**
- * VALENS — Enterprise Sentinel Extension & In-App Deception Agent
- * (c) 2026 VALENS. Security Operations. Deception. Intelligence.
+ * ScleraX — Enterprise Sentinel Extension & In-App Deception Agent
+ * (c) 2026 ScleraX. Security Operations. Deception. Intelligence.
  * 
  * Embeddable script that runs on customer web assets (e.g. Medicare.AI, Apex Global Finance).
  * Provides a sleek docked floating security badge and an interactive slide-out SOC side tab.
  */
 
 (function () {
-  if (window.__VALENS_SENTINEL_INITIALIZED__) return;
-  window.__VALENS_SENTINEL_INITIALIZED__ = true;
+  if (window.__ScleraX_SENTINEL_INITIALIZED__) return;
+  window.__ScleraX_SENTINEL_INITIALIZED__ = true;
 
   const SOC_URL = currentScript.getAttribute?.('data-soc-url') || (window.location.port === '8088' ? 'http://127.0.0.1:8050' : window.location.origin);
   const SITE_ID = currentScript.getAttribute?.('data-site-id') || (window.location.pathname.includes('medicare') ? 'medicare-ai' : 'apex-finance');
@@ -16,7 +16,7 @@
 
   // Inject Styles
   const style = document.createElement('style');
-  style.id = 'valens-sentinel-styles';
+  style.id = 'ScleraX-sentinel-styles';
   style.textContent = `
     .cs-sentinel-badge {
       position: fixed;
@@ -342,14 +342,14 @@
   // Create Badge
   const badge = document.createElement('div');
   badge.className = 'cs-sentinel-badge';
-  badge.id = 'valens-sentinel-badge';
+  badge.id = 'ScleraX-sentinel-badge';
   badge.innerHTML = `
     <div class="cs-sentinel-icon">
       <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v2h-2V7zm0 4h2v6h-2v-6z"/></svg>
     </div>
     <div class="cs-sentinel-info">
       <div class="cs-sentinel-title">
-        VALENS
+        ScleraX
         <span class="cs-sentinel-dot"></span>
       </div>
       <div class="cs-sentinel-status-pill">SENTINEL ACTIVE</div>
@@ -363,7 +363,7 @@
 
   const drawer = document.createElement('aside');
   drawer.className = 'cs-drawer';
-  drawer.id = 'valens-sentinel-drawer';
+  drawer.id = 'ScleraX-sentinel-drawer';
 
   function renderDrawerContent() {
     drawer.innerHTML = `
@@ -373,7 +373,7 @@
             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v2h-2V7zm0 4h2v6h-2v-6z"/></svg>
           </div>
           <div>
-            <div style="font-size:14px;font-weight:800;letter-spacing:0.5px;color:#fff;">VALENS SENTINEL</div>
+            <div style="font-size:14px;font-weight:800;letter-spacing:0.5px;color:#fff;">ScleraX SENTINEL</div>
             <div style="font-size:11px;color:#38bdf8;font-family:'JetBrains Mono',monospace;">v2.5 Fleet Security Agent</div>
           </div>
         </div>
@@ -432,12 +432,12 @@
         </button>
 
         <a href="${SOC_URL}/dashboard" target="_blank" class="cs-btn-soc" id="cs-open-soc-btn">
-          <span>Open VALENS SOC Command Center</span>
+          <span>Open ScleraX SOC Command Center</span>
           <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
         </a>
 
         <div style="font-size:10px;text-align:center;color:#64748b;line-height:1.5;">
-          VALENS Autonomous Deception Mesh protects this application with real-time canary traps and in-line reverse proxy shielding.
+          ScleraX Autonomous Deception Mesh protects this application with real-time canary traps and in-line reverse proxy shielding.
         </div>
       </div>
     `;
@@ -511,7 +511,7 @@
   badge.onclick = openDrawer;
   overlay.onclick = closeDrawer;
 
-  // Poll live status from VALENS backend if available
+  // Poll live status from ScleraX backend if available
   async function fetchLiveStatus() {
     try {
       const res = await fetch(`${SOC_URL}/api/v1/sentinel/site-status/${SITE_ID}`);

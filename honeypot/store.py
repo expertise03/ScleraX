@@ -1,4 +1,4 @@
-"""SQLite/WAL-backed telemetry storage for VALENS."""
+"""SQLite/WAL-backed telemetry storage for ScleraX."""
 
 from __future__ import annotations
 
@@ -441,7 +441,7 @@ class TelemetryStore:
             return None
         return {
             "exported_at": utc_now(),
-            "classification": "VALENS DECOY TELEMETRY",
+            "classification": "ScleraX DECOY TELEMETRY",
             "session": session,
             "events": list(reversed(self.list_events(session_id=session_id, limit=2_000))),
         }

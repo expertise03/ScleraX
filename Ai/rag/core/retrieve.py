@@ -50,10 +50,10 @@ class Retriever:
         )
         if self.collection.count() == 0:
             try:
-                legacy = self.chroma.get_collection("cybershield_security_kb")
+                legacy = self.chroma.get_collection("ScleraX_security_kb")
                 if legacy.count() > 0:
                     self.collection = legacy
-                    collection_name = "cybershield_security_kb"
+                    collection_name = "ScleraX_security_kb"
             except Exception:
                 pass
         print(f"[retrieve] chroma collection '{collection_name}': {self.collection.count()} docs")

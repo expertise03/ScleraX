@@ -8,8 +8,8 @@ content = console_path.read_text(encoding="utf-8")
 
 # 1. Update title and brand
 content = content.replace(
-    "<title>VALENS — Security Operations. Deception. Intelligence</title>",
-    "<title>VALENS — Prototype Deception Grid</title>"
+    "<title>ScleraX — Security Operations. Deception. Intelligence</title>",
+    "<title>ScleraX — Prototype Deception Grid</title>"
 )
 content = content.replace(
     '<span class="topbar-brand-badge">Security Operations. Deception. Intelligence</span>',

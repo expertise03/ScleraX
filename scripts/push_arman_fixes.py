@@ -1,7 +1,7 @@
 """
 push_arman_fixes.py
-Pushes today's 3 high-priority honeypot and dashboard fixes to CyberShield-AI-Hackathon main.
-All commits authored by Shaikh Arman <shaikharmanmukhtar125@gmail.com>.
+Pushes today's 3 high-priority honeypot and dashboard fixes to ScleraX main.
+All commits authored by Harini P <harini.pazhani03@gmail.com>.
 """
 
 import subprocess
@@ -11,10 +11,10 @@ import shutil
 import tempfile
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-HACKATHON_REMOTE_URL = "https://github.com/harkirat-data/CyberShield-AI-Hackathon.git"
+HACKATHON_REMOTE_URL = "https://github.com/expertise03/ScleraX.git"
 
-AUTHOR = "Shaikh Arman"
-EMAIL = "shaikharmanmukhtar125@gmail.com"
+AUTHOR = "Harini P"
+EMAIL = "harini.pazhani03@gmail.com"
 
 COMMITS = [
     (
@@ -43,7 +43,7 @@ def run(cmd, cwd, env=None):
 
 
 def main():
-    print(f"VALENS -- Pushing High-Priority Fixes")
+    print(f"ScleraX -- Pushing High-Priority Fixes")
     print(f"Author: {AUTHOR} <{EMAIL}>")
     print("=" * 60)
 
@@ -106,7 +106,7 @@ def main():
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
 
-    print("\nAll fixes pushed under Shaikh Arman.")
+    print("\nAll fixes pushed under Harini P.")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-"""Unit tests for VALENS STRIDE threat classification and severity calculations.
+"""Unit tests for ScleraX STRIDE threat classification and severity calculations.
 """
 
 import unittest

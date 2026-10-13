@@ -1,8 +1,8 @@
-# VALENS Autonomous Incident Response Playbooks
+# ScleraX Autonomous Incident Response Playbooks
 
 ## Overview
 
-VALENS automates defense workflows to transform adversary intrusion attempts into actionable mitigation. This guide outlines standard operating playbooks implemented by the autonomous SOC engine.
+ScleraX automates defense workflows to transform adversary intrusion attempts into actionable mitigation. This guide outlines standard operating playbooks implemented by the autonomous SOC engine.
 
 ---
 
@@ -33,7 +33,7 @@ VALENS automates defense workflows to transform adversary intrusion attempts int
 ### Playbook 3: Ransomware Canary SMB Share Isolation
 
 - **Objective**: Prevent lateral ransomware encryption across local network shares.
-- **Triggers**: File modification or encryption attempt on canary dummy shares (e.g. `\\valens-share\canary_budget.xlsx`).
+- **Triggers**: File modification or encryption attempt on canary dummy shares (e.g. `\\ScleraX-share\canary_budget.xlsx`).
 - **Automated Workflow**:
   1. Trigger immediate host network adapter disconnection via agent socket.
   2. Take forensic snapshot of running process tree.

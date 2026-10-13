@@ -1,4 +1,4 @@
-"""Unit tests for VALENS canary token generation and tripwire triggers.
+"""Unit tests for ScleraX canary token generation and tripwire triggers.
 """
 
 import unittest

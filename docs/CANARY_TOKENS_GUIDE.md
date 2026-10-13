@@ -1,4 +1,4 @@
-# VALENS Canary Tokens Deployment & Rotation Guide
+# ScleraX Canary Tokens Deployment & Rotation Guide
 
 ## Overview
 
@@ -26,5 +26,5 @@ Canary tokens (honeytokens) provide high-signal, zero-false-positive intrusion a
 
 1. **Generation**: Cryptographically random 32-character tokens generated on decoy boot.
 2. **Distribution**: Seeded into decoy services, synthetic environment variables, and git fixtures.
-3. **Audit**: Monitored via the VALENS centralized event loop.
+3. **Audit**: Monitored via the ScleraX centralized event loop.
 4. **Rotation**: Automatically retired and refreshed every 30 days or immediately following an adversary engagement.

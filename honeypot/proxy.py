@@ -1,12 +1,12 @@
 """
-VALENS — Medicare.AI WAF Reverse Proxy
+ScleraX — Medicare.AI WAF Reverse Proxy
 =======================================
-Places VALENS's threat-detection pipeline in front of Medicare.AI.
+Places ScleraX's threat-detection pipeline in front of Medicare.AI.
 
 Architecture:
     Internet / User
           │
-    VALENS  (FastAPI, port 8050)
+    ScleraX  (FastAPI, port 8050)
           │   /proxy/{path} catch-all
           │
        MedicareWAFProxy
@@ -16,7 +16,7 @@ Architecture:
           ├─ [3] Gate:    blocked_sources or critical intent → 403 WAF_BLOCK
           └─ [4] Forward: httpx → http://MEDICARE_AI_URL/{path}
 
-All events are surfaced in the VALENS SOC dashboard in real-time.
+All events are surfaced in the ScleraX SOC dashboard in real-time.
 """
 
 from __future__ import annotations
@@ -145,7 +145,7 @@ class _SharedProxyState:
 
 class MedicareWAFProxy:
     """
-    Inspects each incoming HTTP request through VALENS's existing
+    Inspects each incoming HTTP request through ScleraX's existing
     threat-detection pipeline before forwarding it to Medicare.AI.
 
     Parameters
@@ -296,7 +296,7 @@ class MedicareWAFProxy:
             f"{body_preview}"
         ).strip()
 
-        # ── Classify intent (reuses existing VALENS classifier) ───
+        # ── Classify intent (reuses existing ScleraX classifier) ───
         intent = IntentClassifier.classify(request_summary)
 
         # ── Compute WAF risk score ──────────────────────────────────────
@@ -314,7 +314,7 @@ class MedicareWAFProxy:
             risk_score=risk_score,
         )
 
-        # ── Log to VALENS telemetry ───────────────────────────────
+        # ── Log to ScleraX telemetry ───────────────────────────────
         session_id = new_id("waf")
         await self._log_request(
             session_id=session_id,
@@ -352,15 +352,15 @@ class MedicareWAFProxy:
             )
             return Response(
                 content=(
-                    f'{{"error":"Blocked by VALENS WAF","reason":"{block_reason}",'
+                    f'{{"error":"Blocked by ScleraX WAF","reason":"{block_reason}",'
                     f'"risk_score":{risk_score}}}'
                 ),
                 status_code=403,
                 media_type="application/json",
                 headers={
-                    "X-Valens-WAF": "BLOCKED",
-                    "X-Valens-Risk": str(risk_score),
-                    "X-Valens-Intent": intent.label,
+                    "X-ScleraX-WAF": "BLOCKED",
+                    "X-ScleraX-Risk": str(risk_score),
+                    "X-ScleraX-Intent": intent.label,
                 },
             )
 
@@ -492,7 +492,7 @@ class MedicareWAFProxy:
             for k, v in headers.items()
             if k.lower() not in HOP_BY_HOP_HEADERS
         }
-        forward_headers["X-Forwarded-By"] = "Valens-WAF/1.0"
+        forward_headers["X-Forwarded-By"] = "ScleraX-WAF/1.0"
         forward_headers["X-Protected-App"] = "Medicare.AI"
 
         t0 = time.monotonic()
@@ -512,8 +512,8 @@ class MedicareWAFProxy:
                 for k, v in upstream.headers.items()
                 if k.lower() not in HOP_BY_HOP_HEADERS
             }
-            response_headers["X-Valens-WAF"] = "INSPECTED"
-            response_headers["X-Valens-Latency"] = str(latency_ms)
+            response_headers["X-ScleraX-WAF"] = "INSPECTED"
+            response_headers["X-ScleraX-Latency"] = str(latency_ms)
             response_headers["X-Content-Type-Options"] = "nosniff"
             response_headers["X-Frame-Options"] = "SAMEORIGIN"
             response_headers["X-XSS-Protection"] = "1; mode=block"
@@ -541,7 +541,7 @@ class MedicareWAFProxy:
                     ),
                     status_code=502,
                     media_type="application/json",
-                    headers={"X-Valens-WAF": "UPSTREAM_DOWN"},
+                    headers={"X-ScleraX-WAF": "UPSTREAM_DOWN"},
                 ),
                 502,
                 latency_ms,
@@ -553,7 +553,7 @@ class MedicareWAFProxy:
                     content='{"error":"Medicare.AI upstream timed out"}',
                     status_code=504,
                     media_type="application/json",
-                    headers={"X-Valens-WAF": "UPSTREAM_TIMEOUT"},
+                    headers={"X-ScleraX-WAF": "UPSTREAM_TIMEOUT"},
                 ),
                 504,
                 latency_ms,
@@ -565,7 +565,7 @@ class MedicareWAFProxy:
                     content=f'{{"error":"WAF proxy error: {str(exc)[:200]}"}}',
                     status_code=500,
                     media_type="application/json",
-                    headers={"X-Valens-WAF": "PROXY_ERROR"},
+                    headers={"X-ScleraX-WAF": "PROXY_ERROR"},
                 ),
                 500,
                 latency_ms,
@@ -586,7 +586,7 @@ class MedicareWAFProxy:
         request_summary: str,
         timestamp: str,
     ) -> None:
-        """Persist WAF event to VALENS's existing telemetry store."""
+        """Persist WAF event to ScleraX's existing telemetry store."""
         try:
             session = DecoySession(
                 session_id=session_id,
@@ -651,7 +651,7 @@ class MedicareWAFProxy:
     # ------------------------------------------------------------------
 
     def get_metrics(self) -> Dict[str, Any]:
-        """Return live proxy metrics for the VALENS dashboard API."""
+        """Return live proxy metrics for the ScleraX dashboard API."""
         return self.state.snapshot()
 
     async def simulate_attack(self, vector: str = "sqli") -> Dict[str, Any]:
@@ -743,7 +743,7 @@ class MedicareWAFProxy:
         max_reqs = self.config.get("max_requests_per_minute", 60)
 
         if fmt == "nginx":
-            content = f"""# VALENS WAF Rules for Medicare.AI (Nginx Format)
+            content = f"""# ScleraX WAF Rules for Medicare.AI (Nginx Format)
 # Generated: {utc_now()}
 
 limit_req_zone $binary_remote_addr zone=medicare_waf:10m rate={max_reqs}r/m;
@@ -763,66 +763,66 @@ server {{
     # SQL Injection Defense Rule
     location ~* "('||\\\"|union|select|insert|drop|delete|--|\\/\\*)" {{
         deny all;
-        return 403 "Blocked by VALENS WAF (SQLi)";
+        return 403 "Blocked by ScleraX WAF (SQLi)";
     }}
 
     # Path Traversal Defense Rule
     location ~* "(\\.\\.\\/|\\.\\.\\%2f|\\/etc\\/passwd|\\.env)" {{
         deny all;
-        return 403 "Blocked by VALENS WAF (Path Traversal)";
+        return 403 "Blocked by ScleraX WAF (Path Traversal)";
     }}
 
     location / {{
         proxy_pass {self.target_url};
-        proxy_set_header X-Forwarded-By "Valens-WAF";
+        proxy_set_header X-Forwarded-By "ScleraX-WAF";
     }}
 }}
 """
         elif fmt == "cloudflare":
-            content = f"""// VALENS Cloudflare WAF Expression Rules
+            content = f"""// ScleraX Cloudflare WAF Expression Rules
 {{
-  "name": "VALENS Medicare.AI Protection Rules",
+  "name": "ScleraX Medicare.AI Protection Rules",
   "rules": [
     {{
       "expression": "(http.request.uri.query contains \"' OR\" or http.request.uri.query contains \"UNION SELECT\")",
       "action": "block",
-      "description": "VALENS SQLi Protection (Risk Threshold: {thresh})"
+      "description": "ScleraX SQLi Protection (Risk Threshold: {thresh})"
     }},
     {{
       "expression": "(http.request.uri.path contains \"/etc/passwd\" or http.request.uri.path contains \"/.env\")",
       "action": "block",
-      "description": "VALENS Path Traversal Protection"
+      "description": "ScleraX Path Traversal Protection"
     }},
     {{
       "expression": "rate(http.request.uri, 1m) > {max_reqs}",
       "action": "challenge",
-      "description": "VALENS Sliding-Window Rate Limit"
+      "description": "ScleraX Sliding-Window Rate Limit"
     }}
   ]
 }}
 """
         else: # modsecurity
-            content = f"""# VALENS ModSecurity v3 Ruleset for Medicare.AI
+            content = f"""# ScleraX ModSecurity v3 Ruleset for Medicare.AI
 # Generated: {utc_now()}
 
 SecRuleEngine On
 
-# Rule 9001: VALENS Rate Limiting
+# Rule 9001: ScleraX Rate Limiting
 SecAction "id:9001,phase:1,nolog,pass,initcol:ip=%{{REMOTE_ADDR}},setvar:ip.request_count=+1,expirevar:ip.request_count=60"
-SecRule IP:REQUEST_COUNT "@gt {max_reqs}" "id:9002,phase:1,deny,status:429,log,msg:'VALENS Rate Limit Exceeded'"
+SecRule IP:REQUEST_COUNT "@gt {max_reqs}" "id:9002,phase:1,deny,status:429,log,msg:'ScleraX Rate Limit Exceeded'"
 
 # Rule 9003: SQL Injection Detection (Risk Threshold: {thresh})
 SecRule REQUEST_URI|REQUEST_BODY "@rx (?i)('(\\s*)+or|union(\\s*)+select|select(\\s*)+.*from|drop(\\s*)+table)" \\
-    "id:9003,phase:2,deny,status:403,log,msg:'VALENS WAF: SQL Injection Attack Detected'"
+    "id:9003,phase:2,deny,status:403,log,msg:'ScleraX WAF: SQL Injection Attack Detected'"
 
 # Rule 9004: XSS Detection
 SecRule REQUEST_URI|REQUEST_BODY "@rx (?i)(<script|javascript:|onerror=|onload=)" \\
-    "id:9004,phase:2,deny,status:403,log,msg:'VALENS WAF: Cross-Site Scripting Detected'"
+    "id:9004,phase:2,deny,status:403,log,msg:'ScleraX WAF: Cross-Site Scripting Detected'"
 """
 
         return {
             "format": fmt,
-            "filename": f"valens_medicare_waf_{fmt}.conf",
+            "filename": f"ScleraX_medicare_waf_{fmt}.conf",
             "content": content,
             "timestamp": utc_now(),
         }

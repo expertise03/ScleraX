@@ -1,4 +1,4 @@
-"""Normalize honeypot activity into the existing VALENS SOC analysis layer."""
+"""Normalize honeypot activity into the existing ScleraX SOC analysis layer."""
 
 from __future__ import annotations
 
@@ -96,7 +96,7 @@ class SocBridge:
                         severity=level,
                         risk_score=score,
                         source_ip=str(session.get("source_ip", "unknown")),
-                        host=str(session.get("persona", "valens-decoy")),
+                        host=str(session.get("persona", "ScleraX-decoy")),
                         service=str(session.get("service", "honeypot")),
                         event_type=event_type,
                         intent=intent.label,
@@ -118,8 +118,8 @@ class SocBridge:
             {
                 "event_id": telemetry.event_id,
                 "timestamp": telemetry.timestamp,
-                "host": session.get("persona", "valens-decoy"),
-                "source": "valens_honeypot",
+                "host": session.get("persona", "ScleraX-decoy"),
+                "source": "ScleraX_honeypot",
                 "event_type": event_type,
                 "severity": telemetry.severity or intent.severity,
                 "actor": {
@@ -128,7 +128,7 @@ class SocBridge:
                     "user": username or session.get("username"),
                 },
                 "target": {
-                    "host": "valens-decoy",
+                    "host": "ScleraX-decoy",
                     "service": session.get("service"),
                     "port": session.get("destination_port"),
                 },
@@ -198,7 +198,7 @@ class SocBridge:
                 severity=risk.level,
                 risk_score=risk.score,
                 source_ip=str(session.get("source_ip", "unknown")),
-                host=str(session.get("persona", "valens-decoy")),
+                host=str(session.get("persona", "ScleraX-decoy")),
                 service=str(session.get("service", "honeypot")),
                 event_type=event_type,
                 intent=intent.label,

@@ -1,5 +1,5 @@
 # install_service_windows.ps1
-# Installs VALENS Windows collectors as services.
+# Installs ScleraX Windows collectors as services.
 # Run as Administrator: .\install_service_windows.ps1
 
 #Requires -RunAsAdministrator
@@ -10,7 +10,7 @@ $InstallDir = "C:\soc\collectors"
 $LogDir     = "C:\soc\logs"
 $PythonExe  = (Get-Command python.exe).Source
 
-Write-Host "[VALENS] Installing Windows collectors..." -ForegroundColor Cyan
+Write-Host "[ScleraX] Installing Windows collectors..." -ForegroundColor Cyan
 
 # 1. Create directories
 New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
@@ -24,20 +24,20 @@ foreach ($file in $files) {
     $source = Join-Path $ScriptDir $file
     if (Test-Path $source) {
         Copy-Item $source $InstallDir -Force
-        Write-Host "[VALENS] Copied $file" -ForegroundColor Green
+        Write-Host "[ScleraX] Copied $file" -ForegroundColor Green
     } else {
-        Write-Host "[VALENS] WARNING: $file not found in $ScriptDir" -ForegroundColor Yellow
+        Write-Host "[ScleraX] WARNING: $file not found in $ScriptDir" -ForegroundColor Yellow
     }
 }
 
 # 3. Install Python dependencies
-Write-Host "[VALENS] Installing Python dependencies..." -ForegroundColor Cyan
+Write-Host "[ScleraX] Installing Python dependencies..." -ForegroundColor Cyan
 & $PythonExe -m pip install --quiet pywin32 watchdog
 
 # 4. Download NSSM (service manager) if not present
 $NssmPath = "$env:SystemRoot\System32\nssm.exe"
 if (-not (Test-Path $NssmPath)) {
-    Write-Host "[VALENS] Downloading NSSM..." -ForegroundColor Cyan
+    Write-Host "[ScleraX] Downloading NSSM..." -ForegroundColor Cyan
     $NssmUrl = "https://nssm.cc/release/nssm-2.24.zip"
     $NssmZip = "$env:TEMP\nssm.zip"
     $NssmExtractDir = "$env:TEMP\nssm"
@@ -49,63 +49,63 @@ if (-not (Test-Path $NssmPath)) {
     $NssmExe = Get-ChildItem -Path $NssmExtractDir -Recurse -Filter "nssm.exe" |
                Where-Object { $_.DirectoryName -match "win64" } | Select-Object -First 1
     Copy-Item $NssmExe.FullName $NssmPath -Force
-    Write-Host "[VALENS] NSSM installed" -ForegroundColor Green
+    Write-Host "[ScleraX] NSSM installed" -ForegroundColor Green
 }
 
 # 5. Install auth collector service
-Write-Host "[VALENS] Installing valens-auth service..." -ForegroundColor Cyan
+Write-Host "[ScleraX] Installing ScleraX-auth service..." -ForegroundColor Cyan
 
-& $NssmPath install valens-auth $PythonExe "$InstallDir\auth_collector.py" | Out-Null
-& $NssmPath set valens-auth AppDirectory $InstallDir           | Out-Null
-& $NssmPath set valens-auth AppStdoutOutput "$LogDir\auth.out.log"   | Out-Null
-& $NssmPath set valens-auth AppStderrOutput "$LogDir\auth.err.log"   | Out-Null
-& $NssmPath set valens-auth AppRotateFiles 1                  | Out-Null
-& $NssmPath set valens-auth AppRotateBytes 10485760           | Out-Null  # 10MB
-& $NssmPath set valens-auth DisplayName "VALENS Auth Collector"     | Out-Null
-& $NssmPath set valens-auth Description "Collects Windows Security/Auth events" | Out-Null
-& $NssmPath set valens-auth Start SERVICE_AUTO_START           | Out-Null
+& $NssmPath install ScleraX-auth $PythonExe "$InstallDir\auth_collector.py" | Out-Null
+& $NssmPath set ScleraX-auth AppDirectory $InstallDir           | Out-Null
+& $NssmPath set ScleraX-auth AppStdoutOutput "$LogDir\auth.out.log"   | Out-Null
+& $NssmPath set ScleraX-auth AppStderrOutput "$LogDir\auth.err.log"   | Out-Null
+& $NssmPath set ScleraX-auth AppRotateFiles 1                  | Out-Null
+& $NssmPath set ScleraX-auth AppRotateBytes 10485760           | Out-Null  # 10MB
+& $NssmPath set ScleraX-auth DisplayName "ScleraX Auth Collector"     | Out-Null
+& $NssmPath set ScleraX-auth Description "Collects Windows Security/Auth events" | Out-Null
+& $NssmPath set ScleraX-auth Start SERVICE_AUTO_START           | Out-Null
 
 # 6. Install system collector service
-Write-Host "[VALENS] Installing valens-system service..." -ForegroundColor Cyan
+Write-Host "[ScleraX] Installing ScleraX-system service..." -ForegroundColor Cyan
 
-& $NssmPath install valens-system $PythonExe "$InstallDir\system_collector_windows.py" | Out-Null
-& $NssmPath set valens-system AppDirectory $InstallDir        | Out-Null
-& $NssmPath set valens-system AppStdoutOutput "$LogDir\system.out.log" | Out-Null
-& $NssmPath set valens-system AppStderrOutput "$LogDir\system.err.log" | Out-Null
-& $NssmPath set valens-system AppRotateFiles 1                | Out-Null
-& $NssmPath set valens-system AppRotateBytes 10485760         | Out-Null
-& $NssmPath set valens-system DisplayName "VALENS System Collector"  | Out-Null
-& $NssmPath set valens-system Description "Collects Windows System/Sysmon events" | Out-Null
-& $NssmPath set valens-system Start SERVICE_AUTO_START        | Out-Null
+& $NssmPath install ScleraX-system $PythonExe "$InstallDir\system_collector_windows.py" | Out-Null
+& $NssmPath set ScleraX-system AppDirectory $InstallDir        | Out-Null
+& $NssmPath set ScleraX-system AppStdoutOutput "$LogDir\system.out.log" | Out-Null
+& $NssmPath set ScleraX-system AppStderrOutput "$LogDir\system.err.log" | Out-Null
+& $NssmPath set ScleraX-system AppRotateFiles 1                | Out-Null
+& $NssmPath set ScleraX-system AppRotateBytes 10485760         | Out-Null
+& $NssmPath set ScleraX-system DisplayName "ScleraX System Collector"  | Out-Null
+& $NssmPath set ScleraX-system Description "Collects Windows System/Sysmon events" | Out-Null
+& $NssmPath set ScleraX-system Start SERVICE_AUTO_START        | Out-Null
 
 # 7. Configure recovery: restart on failure
-& $NssmPath set valens-auth   AppExit Default Restart          | Out-Null
-& $NssmPath set valens-auth   AppRestartDelay 5000             | Out-Null
-& $NssmPath set valens-system AppExit Default Restart          | Out-Null
-& $NssmPath set valens-system AppRestartDelay 5000             | Out-Null
+& $NssmPath set ScleraX-auth   AppExit Default Restart          | Out-Null
+& $NssmPath set ScleraX-auth   AppRestartDelay 5000             | Out-Null
+& $NssmPath set ScleraX-system AppExit Default Restart          | Out-Null
+& $NssmPath set ScleraX-system AppRestartDelay 5000             | Out-Null
 
 # 8. Start services
-Start-Service valens-auth
-Start-Service valens-system
+Start-Service ScleraX-auth
+Start-Service ScleraX-system
 
 Start-Sleep -Seconds 2
 
 Write-Host ""
-Write-Host "[VALENS] ========================================" -ForegroundColor Green
-Write-Host "[VALENS] Installation complete!" -ForegroundColor Green
-Write-Host "[VALENS] ========================================" -ForegroundColor Green
+Write-Host "[ScleraX] ========================================" -ForegroundColor Green
+Write-Host "[ScleraX] Installation complete!" -ForegroundColor Green
+Write-Host "[ScleraX] ========================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "Service status:"
-Get-Service valens-auth   | Format-Table -AutoSize
-Get-Service valens-system | Format-Table -AutoSize
+Get-Service ScleraX-auth   | Format-Table -AutoSize
+Get-Service ScleraX-system | Format-Table -AutoSize
 Write-Host ""
 Write-Host "Useful commands:" -ForegroundColor Cyan
-Write-Host "  Get-Service valens-auth"
-Write-Host "  Get-Service valens-system"
-Write-Host "  Restart-Service valens-auth"
+Write-Host "  Get-Service ScleraX-auth"
+Write-Host "  Get-Service ScleraX-system"
+Write-Host "  Restart-Service ScleraX-auth"
 Write-Host "  Get-Content '$LogDir\auth.out.log' -Wait"
 Write-Host "  Get-Content '$LogDir\system.out.log' -Wait"
 Write-Host ""
 Write-Host "Uninstall:" -ForegroundColor Yellow
-Write-Host "  & nssm.exe remove valens-auth confirm"
-Write-Host "  & nssm.exe remove valens-system confirm"
+Write-Host "  & nssm.exe remove ScleraX-auth confirm"
+Write-Host "  & nssm.exe remove ScleraX-system confirm"

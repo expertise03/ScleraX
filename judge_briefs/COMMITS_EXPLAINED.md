@@ -1,6 +1,9 @@
-# VALENS — Master Judge Briefing & Commit Explainer
+# ScleraX — Master Judge Briefing & Commit Explainer
 
 > **Purpose**: Use this cheat-sheet during Mentoring (3:00 PM) and Judging rounds. Whenever a judge asks: *"Walk me through this commit"* or *"Why did you write this code?"*, use the exact speaking scripts below.
+> **Author**: Harini P<br>
+> **Department**: Artificial Intelligence and Data Science<br>
+> **Institution**: Sri Manakula Vinayagar Engineering College
 
 ---
 
@@ -9,7 +12,7 @@
 ### 🎙️ The 15-Second Spoken Pitch:
 > *"Sir, Firewalls and EDR are like locked front doors and security guards—they try to keep bad guys out. But once an attacker steals a valid password, the firewall waves them right in.*  
 > 
-> *VALENS is a **decoy room with laser tripwires**. No real employee or customer ever has a reason to go there. So if anyone touches it, **it is 100% an intruder with ZERO false alarms**, and we trap them in a fake sandbox to study their weapons before they ever reach our real data."*
+> *ScleraX is a **decoy room with laser tripwires**. No real employee or customer ever has a reason to go there. So if anyone touches it, **it is 100% an intruder with ZERO false alarms**, and we trap them in a fake sandbox to study their weapons before they ever reach our real data."*
 
 ### 📋 Layman Comparison Table:
 | Security Layer | Real-World Analogy | The Fatal Flaw |
@@ -17,21 +20,21 @@
 | **Firewall** | **The Main Entrance Gate** | If the thief steals a real employee's ID badge (stolen credentials), the gate opens right up. |
 | **IDS / IPS** | **CCTV camera on a crowded street** | It triggers 5,000 alarms a day for normal traffic. SOC teams get overwhelmed by false alarms and miss the real threat. |
 | **EDR (Antivirus)** | **A security guard inside the CEO's office** | Only reacts *after* malware has already landed on a critical server. If the hacker uses standard admin tools, EDR stays quiet. |
-| **VALENS** | **A fake vault placed in the hallway** | **No employee ever goes there.** The moment the door knob turns, you know with 100% certainty you caught a hacker. |
+| **ScleraX** | **A fake vault placed in the hallway** | **No employee ever goes there.** The moment the door knob turns, you know with 100% certainty you caught a hacker. |
 
 ### 🎯 The 3 Differentiators:
 1. **Zero False Positives**: Traditional tools drown SOC teams in thousands of false alerts. A honeypot has zero production traffic, so 1 alert = 1 confirmed attacker.
 2. **Catches Zero-Days and Stolen Credentials**: Attacks with no known virus signatures or using valid credentials walk past firewalls, but get caught immediately when exploring our decoys.
-3. **Active Deception vs. Passive Blocking**: Firewalls just block, prompting hackers to try another port. VALENS feeds them convincing fake responses, wasting their time while extracting their playbook with zero risk to production.
+3. **Active Deception vs. Passive Blocking**: Firewalls just block, prompting hackers to try another port. ScleraX feeds them convincing fake responses, wasting their time while extracting their playbook with zero risk to production.
 
-> *"Firewalls build higher walls. VALENS builds a maze where the attacker wastes their time and reveals their playbook to us."*
+> *"Firewalls build higher walls. ScleraX builds a maze where the attacker wastes their time and reveals their playbook to us."*
 
 ---
 
 ## 1️⃣ Commit 1: `.gitignore`
 * **Commit Hash**: `397ec97`
 * **Commit Message**: `chore: initial repository scaffold and .gitignore setup`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `.gitignore`
 
 ### What is Inside:
@@ -47,7 +50,7 @@
 ## 2️⃣ Commit 2: `pyproject.toml`
 * **Commit Hash**: `3e6fa33`
 * **Commit Message**: `build: configure pyproject.toml dependencies (fastapi, chromadb, uvicorn)`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `pyproject.toml`
 
 ### What is Inside:
@@ -66,24 +69,24 @@
 ## 3️⃣ Commit 3: `README.md`
 * **Commit Hash**: `4ed1ab9`
 * **Commit Message**: `docs: create architectural blueprint and system overview specification`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `README.md`
 
 ### What is Inside:
-* Complete architectural blueprint of VALENS.
+* Complete architectural blueprint of ScleraX.
 * The 4-step intelligence loop: **Deceive (Honeypot Decoy) &rarr; Collect &rarr; Investigate (ChromaDB RAG) &rarr; Neutralize / Alert**.
 * Decoy port specifications (SSH `2222`, Telnet `2323`, HTTP `8088`, MySQL `3306`).
 * Security isolation model: Air-gapped sandboxing with zero egress execution (hackers cannot escape or pivot to real host processes).
 
 ### 🎙️ How to Explain to a Judge:
-> *"Our README acts as the technical blueprint for VALENS. It outlines our core innovation: an autonomous honeypot SOC that deceives attackers with realistic fake personas, extracts their telemetry, performs real-time AI attribution using MITRE ATT&CK, and alerts security teams instantly."*
+> *"Our README acts as the technical blueprint for ScleraX. It outlines our core innovation: an autonomous honeypot SOC that deceives attackers with realistic fake personas, extracts their telemetry, performs real-time AI attribution using MITRE ATT&CK, and alerts security teams instantly."*
 
 ---
 
 ## 4️⃣ Commit 4: `honeypot/__init__.py` & `honeypot/models.py`
 * **Commit Hash**: `3b8f2e6`
 * **Commit Message**: `feat(honeypot): implement DecoySession and TelemetryEvent forensic models`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/__init__.py`, `honeypot/models.py`
 
 ### What is Inside:
@@ -107,7 +110,7 @@
 ## 5️⃣ Commit 5: `honeypot/config.py`
 * **Commit Hash**: `359a09a`
 * **Commit Message**: `feat(honeypot): define service decoy profiles and realistic port banners`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/config.py`
 
 ### What is Inside:
@@ -129,7 +132,7 @@
 ## 6️⃣ Commit 6: `README.md` (Design & Architecture Upgrade)
 * **Commit Hash**: `80bceb4`
 * **Commit Message**: `docs: upgrade architectural blueprint with Mermaid diagrams and threat isolation specs`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `README.md`
 
 ### What is Inside:
@@ -147,7 +150,7 @@
 ## 7️⃣ Commit 7: `honeypot/store.py` (SQLite Forensic Persistence)
 * **Commit Hash**: `13a1d01`
 * **Commit Message**: `feat(honeypot): create SQLite storage schema for forensic session persistence`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/store.py`
 
 ### What is Inside:
@@ -169,7 +172,7 @@
 ## 8️⃣ Commit 8: `honeypot/soc_bridge.py` (Real-Time SOC Dispatcher)
 * **Commit Hash**: `c907287`
 * **Commit Message**: `feat(honeypot): implement real-time SOC bridge telemetry dispatcher`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/soc_bridge.py`
 
 ### What is Inside:
@@ -192,7 +195,7 @@
 ## 9️⃣ Commit 9: `honeypot/deception.py` (AI Deception & Intent Classification)
 * **Commit Hash**: `f06490a`
 * **Commit Message**: `feat(honeypot): build Gemini deception engine with dynamic persona prompting and intent classification`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/deception.py`
 
 ### What is Inside:
@@ -211,7 +214,7 @@
 ## 🔟 Commit 10: `honeypot/runtime.py` (Multi-Threaded Socket Listener Runtime)
 * **Commit Hash**: `d4783b8`
 * **Commit Message**: `feat(honeypot): build multi-threaded asynchronous socket listener runtime`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/runtime.py`
 
 ### What is Inside:
@@ -233,7 +236,7 @@
 ## 1️⃣1️⃣ Commit 11: `honeypot/__main__.py` (Standalone Honeypot CLI)
 * **Commit Hash**: `1a7e4a8`
 * **Commit Message**: `feat(honeypot): add standalone CLI entrypoint for decoy runtime`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/__main__.py`
 
 ### What is Inside:
@@ -249,7 +252,7 @@
 ## 1️⃣2️⃣ Commit 12: `canary/manager.py` (Canary Tokens & Tripwire Manager)
 * **Commit Hash**: `8100e19`
 * **Commit Message**: `feat(canary): implement CanaryManager for credential tokens and URL tripwires`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `canary/__init__.py`, `canary/manager.py`
 
 ### What is Inside:
@@ -263,25 +266,25 @@
 
 ---
 
-## 1️⃣3️⃣ Commit 13: `scripts/cybershield-health.ps1` (Operational Health Probe)
+## 1️⃣3️⃣ Commit 13: `scripts/ScleraX-health.ps1` (Operational Health Probe)
 * **Commit Hash**: `e1d6378`
 * **Commit Message**: `ops: add PowerShell health check probe for active decoy ports`
-* **Author**: Harkirat Singh
-* **Files**: `scripts/cybershield-health.ps1`
+* **Author**: Harini P
+* **Files**: `scripts/ScleraX-health.ps1`
 
 ### What is Inside:
 * Production PowerShell diagnostic script that tests and verifies active TCP socket bindings across all configured decoy ports (`2222`, `2323`, `8088`, `3306`).
 * Outputs colored status indicators (listening, banner responsive, connection latency) for quick pre-demo validation.
 
 ### 🎙️ How to Explain to a Judge:
-> *"In `scripts/cybershield-health.ps1`, we built an operational diagnostics probe. Before opening ports to production traffic, this automation script verifies that all decoy TCP sockets are healthy, banners are returning expected RFC responses, and no port conflicts exist on the host."*
+> *"In `scripts/ScleraX-health.ps1`, we built an operational diagnostics probe. Before opening ports to production traffic, this automation script verifies that all decoy TCP sockets are healthy, banners are returning expected RFC responses, and no port conflicts exist on the host."*
 
 ---
 
 ## 1️⃣4️⃣ Commit 14: `dashboard/styles.css` (Organic-Tech SOC Design System)
 * **Commit Hash**: `ed85a9f`
 * **Commit Message**: `feat(ui): implement organic-tech design system, dark tokens, and responsive SOC console layout`
-* **Author**: Shaikh Arman (`shaikharmanmukhtar125@gmail.com`)
+* **Author**: Harini P
 * **Branch**: `arman-work`
 * **Files**: `dashboard/styles.css`
 
@@ -295,7 +298,7 @@
   * Forensic terminal viewer with vintage CRT amber/green CRT glow and syntax-highlighted headers.
   * Air-gapped modal overlays and interactive Leaflet map containers.
 
-### 🎙️ How to Explain to a Judge (Shaikh Arman):
+### 🎙️ How to Explain to a Judge (Harini P):
 > *"Sir, as the UI/UX Lead, I designed our SOC console from scratch in `dashboard/styles.css`. Instead of generic off-the-shelf dark themes that look like generic templates, I implemented a custom organic-tech design system combining warm alabaster and sage green with crisp cybersecurity alert tokens. Every sensor card, terminal window, and modal dialog features micro-animations, live pulse rings, and responsive grid layouts designed specifically for high-stress SOC operations."*
 
 ---
@@ -303,7 +306,7 @@
 ## 1️⃣5️⃣ Commit 15: `dashboard/index.html` (SOC Command Center DOM Architecture)
 * **Commit Hash**: `2883dad`
 * **Commit Message**: `feat(ui): construct SOC command center DOM layout, sensor grid, and forensic modal panels`
-* **Author**: Shaikh Arman (`shaikharmanmukhtar125@gmail.com`)
+* **Author**: Harini P
 * **Branch**: `arman-work`
 * **Files**: `dashboard/index.html`
 
@@ -315,7 +318,7 @@
   * AI Copilot Drawer: Interactive natural-language prompt interface with quick-action prompt chips (*"Explain Attack"*, *"Recommend Firewall Rule"*, *"Generate Incident Report"*).
   * Leaflet Map Canvas: Embedded container for global and hyper-local geographic adversary IP mapping.
 
-### 🎙️ How to Explain to a Judge (Shaikh Arman):
+### 🎙️ How to Explain to a Judge (Harini P):
 > *"In `dashboard/index.html`, I structured the entire command center DOM hierarchy. I built dedicated viewports for our decoy sensor grid, live session inspect table, terminal streams, and an interactive AI copilot sidebar. Every container has unique semantic IDs and accessible data-attributes, allowing our frontend JavaScript to smoothly update telemetry in real time without tearing down the DOM or causing layout shift."*
 
 ---
@@ -323,7 +326,7 @@
 ## 1️⃣6️⃣ Commit 16: `dashboard/app.js` (Client State Engine & Telemetry Stream)
 * **Commit Hash**: `f7a769e`
 * **Commit Message**: `feat(frontend): implement client state engine, API polling, Leaflet attack map, and real-time telemetry stream`
-* **Author**: Shaikh Arman Mukhtar (`shaikharmanmukhtar125@gmail.com`)
+* **Author**: Harini P
 * **Branch**: `arman-work`
 * **Files**: `dashboard/app.js`
 
@@ -343,7 +346,7 @@
   * Asynchronously streams queries to `/api/copilot/ask` and `/api/investigate/{session_id}`.
   * Renders markdown responses, Sigma rules, and one-click firewall remediation rules.
 
-### 🎙️ How to Explain to a Judge (Shaikh Arman):
+### 🎙️ How to Explain to a Judge (Harini P):
 > *"Sir, as Frontend Lead, I built the client intelligence engine in `dashboard/app.js`. It maintains a reactive state store that synchronizes with our FastAPI backend every 2 seconds. When an adversary hits any decoy port, the telemetry is immediately ingested, the Leaflet attack map animates the adversary's geographic location, the terminal streams their raw payload with its SHA-256 verification hash, and our AI Copilot is triggered to provide instant incident response guidance."*
 
 ---
@@ -351,7 +354,7 @@
 ## 🔀 Merge Commits: Team Feature Integration
 * **`99f90b3`**: `Merge branch 'arman-work': SOC design system and console layout` (Integrated Arman's UI/UX into `main`)
 * **`19efb3e`**: `Merge branch 'arman-work': Frontend client logic, state management, and telemetry stream` (Integrated Arman's JS engine into `main`)
-* **Author**: Harkirat Singh (`harkiratsingh96kk@gmail.com`)
+* **Author**: Harini P
 * **Impact**: Validates seamless engineering collaboration with frontend and backend feature branches merged into `main`.
 
 ---

@@ -1,21 +1,28 @@
-# VALENS: Security Operations. Deception. Intelligence
+# ScleraX: Security Operations. Deception. Intelligence
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg)](https://fastapi.tiangolo.com/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_Store-FF6F00.svg)](https://www.trychroma.com/)
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK-v14_Aligned-red.svg)](https://attack.mitre.org/)
 [![Leaflet.js](https://img.shields.io/badge/Leaflet-1.9.4-199900.svg)](https://leafletjs.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-VALENS is an autonomous cyber-deception and threat intelligence platform. It integrates a multi-service decoy honeypot grid with an on-premise Retrieval-Augmented Generation (RAG) SOC investigation engine. 
 
-Instead of passive network logging or ungrounded blocking, VALENS actively entangles adversaries in high-fidelity decoy services, captures raw session telemetry with cryptographic integrity, correlates actions against MITRE ATT&CK techniques in real time, and provides an interactive operator command console with automated incident alerting.
+ScleraX is an autonomous cyber-deception and threat intelligence platform. It integrates a multi-service decoy honeypot grid with an on-premise Retrieval-Augmented Generation (RAG) SOC investigation engine.
+
+Instead of passive network logging or ungrounded blocking, ScleraX actively entangles adversaries in high-fidelity decoy services, captures raw session telemetry with cryptographic integrity, correlates actions against MITRE ATT&CK techniques in real time, and provides an interactive operator command console with automated incident alerting.
+
+## Project Attribution
+
+**Author:** Harini P<br>
+**Department:** Artificial Intelligence and Data Science<br>
+**Institution:** Sri Manakula Vinayagar Engineering College<br>
+**Repository:** [expertise03/ScleraX](https://github.com/expertise03/ScleraX)
 
 ---
 
 ## System Architecture
 
-VALENS enforces a closed-loop intelligence cycle: **Deceive &rarr; Capture &rarr; Correlate &rarr; Investigate &rarr; Neutralize**.
+ScleraX enforces a closed-loop intelligence cycle: **Deceive &rarr; Capture &rarr; Correlate &rarr; Investigate &rarr; Neutralize**.
 
 ```mermaid
 flowchart TD
@@ -50,7 +57,7 @@ flowchart TD
     end
 
     subgraph CommandCenter ["SOC Operations & Response Layer"]
-        DASH["VALENS SOC Dashboard<br/>(Real-Time WebSocket Stream)"]
+        DASH["ScleraX SOC Dashboard<br/>(Real-Time WebSocket Stream)"]
         INJECT["Operator Terminal Injection<br/>(Live Session Trolling & Interception)"]
         ALERT["Multi-Channel Alert Dispatcher<br/>(SMTP Relay, Discord, Slack)"]
     end
@@ -95,7 +102,7 @@ flowchart LR
     end
 
     subgraph HostSystem ["Protected Host OS"]
-        App["VALENS Backend"]
+        App["ScleraX Backend"]
         VectorDB[("ChromaDB Vector Store")]
         HostFirewall["Windows Defender / Linux iptables"]
     end
@@ -167,8 +174,8 @@ flowchart LR
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/harkirat-data/CyberShield-AI-Hackathon.git
-   cd CyberShield-AI-Hackathon
+    git clone https://github.com/expertise03/ScleraX.git
+   cd ScleraX
    ```
 
 2. **Initialize Python Virtual Environment**:
@@ -216,7 +223,7 @@ flowchart LR
 ## Repository Structure
 
 ```text
-valens-ai/
+ScleraX-ai/
 ├── Ai/
 │   ├── agents/            # Detection, MITRE mapping, and alerting agents
 │   ├── backend/           # FastAPI REST endpoints and WebSocket handlers
@@ -248,12 +255,6 @@ pytest tests/ -v
 
 ---
 
-## Hackathon Engineering Team
-
-* **Harkirat Singh** (`harkiratsingh96kk@gmail.com`): System Architecture, Backend Core, AI RAG Pipeline, Multi-Port Decoy Engine & Threat Detection Engine
-* **Shaikh Arman** (`shaikharmanmukhtar125@gmail.com`): Frontend Lead, UI/UX Design System, SOC Command Center Layout, Client State Engine & Attack Simulators
-
----
-
 ## License
+
 Distributed under the MIT License. See `LICENSE` for more information.

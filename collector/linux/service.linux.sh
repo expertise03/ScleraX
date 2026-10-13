@@ -1,6 +1,6 @@
 #!/bin/bash
 # install_service_linux.sh
-# Installs VALENS Linux collectors as systemd services.
+# Installs ScleraX Linux collectors as systemd services.
 # Run with: sudo ./install_service_linux.sh
 
 set -e
@@ -9,7 +9,7 @@ INSTALL_DIR="/opt/soc-testing/collectors"
 LOG_DIR="/opt/soc-testing/logs"
 SERVICE_USER="root"
 
-echo "[VALENS] Installing Linux collectors..."
+echo "[ScleraX] Installing Linux collectors..."
 
 # 1. Create directories
 mkdir -p "$INSTALL_DIR"
@@ -20,35 +20,35 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ -f "$SCRIPT_DIR/collector.py" ]; then
     cp "$SCRIPT_DIR/collector.py" "$INSTALL_DIR/"
-    echo "[VALENS] Copied collector.py"
+    echo "[ScleraX] Copied collector.py"
 else
-    echo "[VALENS] ERROR: collector.py not found in $SCRIPT_DIR"
+    echo "[ScleraX] ERROR: collector.py not found in $SCRIPT_DIR"
     exit 1
 fi
 
 if [ -f "$SCRIPT_DIR/firewall_collector.py" ]; then
     cp "$SCRIPT_DIR/firewall_collector.py" "$INSTALL_DIR/"
-    echo "[VALENS] Copied firewall_collector.py"
+    echo "[ScleraX] Copied firewall_collector.py"
 else
-    echo "[VALENS] WARNING: firewall_collector.py not found, skipping"
+    echo "[ScleraX] WARNING: firewall_collector.py not found, skipping"
 fi
 
 if [ -f "$SCRIPT_DIR/risk_scoring.py" ]; then
     cp "$SCRIPT_DIR/risk_scoring.py" "$INSTALL_DIR/"
-    echo "[VALENS] Copied risk_scoring.py"
+    echo "[ScleraX] Copied risk_scoring.py"
 fi
 
 # 3. Install dependencies (assumes python3 already installed)
 pip3 install --quiet --break-system-packages watchdog || \
 pip3 install --quiet watchdog || \
-echo "[VALENS] WARNING: pip install failed, you may need to install dependencies manually"
+echo "[ScleraX] WARNING: pip install failed, you may need to install dependencies manually"
 
 # 4. Create auth collector service
-cat > /etc/systemd/system/valens-auth.service << 'EOF'
+cat > /etc/systemd/system/ScleraX-auth.service << 'EOF'
 [Unit]
-Description=VALENS Linux Auth Log Collector
+Description=ScleraX Linux Auth Log Collector
 After=network.target
-Documentation=https://github.com/your-org/valens-ai
+Documentation=https://github.com/your-org/ScleraX-ai
 
 [Service]
 Type=simple
@@ -75,14 +75,14 @@ PrivateTmp=true
 WantedBy=multi-user.target
 EOF
 
-echo "[VALENS] Created /etc/systemd/system/valens-auth.service"
+echo "[ScleraX] Created /etc/systemd/system/ScleraX-auth.service"
 
 # 5. Create system/firewall collector service
-cat > /etc/systemd/system/valens-system.service << 'EOF'
+cat > /etc/systemd/system/ScleraX-system.service << 'EOF'
 [Unit]
-Description=VALENS Linux System & Firewall Collector
+Description=ScleraX Linux System & Firewall Collector
 After=network.target
-Documentation=https://github.com/your-org/valens-ai
+Documentation=https://github.com/your-org/ScleraX-ai
 
 [Service]
 Type=simple
@@ -109,10 +109,10 @@ PrivateTmp=true
 WantedBy=multi-user.target
 EOF
 
-echo "[VALENS] Created /etc/systemd/system/valens-system.service"
+echo "[ScleraX] Created /etc/systemd/system/ScleraX-system.service"
 
 # 6. Create logrotate config (prevent disk fill)
-cat > /etc/logrotate.d/valens << 'EOF'
+cat > /etc/logrotate.d/ScleraX << 'EOF'
 /opt/soc-testing/logs/*.log {
     daily
     rotate 14
@@ -138,31 +138,31 @@ cat > /etc/logrotate.d/valens << 'EOF'
 }
 EOF
 
-echo "[VALENS] Created /etc/logrotate.d/valens"
+echo "[ScleraX] Created /etc/logrotate.d/ScleraX"
 
 # 7. Reload systemd, enable, and start
 systemctl daemon-reload
-systemctl enable valens-auth.service
-systemctl enable valens-system.service
-systemctl start valens-auth.service
-systemctl start valens-system.service
+systemctl enable ScleraX-auth.service
+systemctl enable ScleraX-system.service
+systemctl start ScleraX-auth.service
+systemctl start ScleraX-system.service
 
 sleep 2
 
 echo ""
-echo "[VALENS] ========================================"
-echo "[VALENS] Installation complete!"
-echo "[VALENS] ========================================"
+echo "[ScleraX] ========================================"
+echo "[ScleraX] Installation complete!"
+echo "[ScleraX] ========================================"
 echo ""
 echo "Service status:"
-systemctl --no-pager status valens-auth.service | head -5
+systemctl --no-pager status ScleraX-auth.service | head -5
 echo "---"
-systemctl --no-pager status valens-system.service | head -5
+systemctl --no-pager status ScleraX-system.service | head -5
 echo ""
 echo "Useful commands:"
-echo "  sudo systemctl status valens-auth"
-echo "  sudo systemctl status valens-system"
-echo "  sudo journalctl -u valens-auth -f"
+echo "  sudo systemctl status ScleraX-auth"
+echo "  sudo systemctl status ScleraX-system"
+echo "  sudo journalctl -u ScleraX-auth -f"
 echo "  sudo tail -f /opt/soc-testing/logs/auth.out.log"
 echo "  sudo tail -f /opt/soc-testing/logs/system.out.log"
 echo ""

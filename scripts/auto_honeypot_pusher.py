@@ -4,9 +4,9 @@ auto_honeypot_pusher.py - Automated Honeypot Architecture Pusher & Timeline Runn
 
 Pushes all remaining Honeypot Architecture components progressively between
 now and 1:00 PM IST with realistic 4-minute intervals, updating:
-- D:\CyberShield-AI-Hackathon (GitHub main)
-- d:\CyberShield_AI\judge_briefs\COMMITS_EXPLAINED.md
-- d:\CyberShield_AI\HACKATHON_ROADMAP.md
+- D:\ScleraX (GitHub main)
+- d:\ScleraX_AI\judge_briefs\COMMITS_EXPLAINED.md
+- d:\ScleraX_AI\HACKATHON_ROADMAP.md
 """
 
 import os
@@ -22,8 +22,8 @@ try:
 except Exception:
     pass
 
-SRC_DIR = Path("d:/CyberShield_AI").resolve()
-TARGET_DIR = Path("D:/CyberShield-AI-Hackathon").resolve()
+SRC_DIR = Path("d:/ScleraX_AI").resolve()
+TARGET_DIR = Path("D:/ScleraX").resolve()
 BRIEF_FILE = SRC_DIR / "judge_briefs" / "COMMITS_EXPLAINED.md"
 ROADMAP_FILE = SRC_DIR / "HACKATHON_ROADMAP.md"
 
@@ -38,7 +38,7 @@ STEPS = [
 ## 9️⃣ Commit 9: `honeypot/deception.py` (AI Deception & Intent Classification)
 * **Commit Hash**: `{commit_hash}`
 * **Commit Message**: `feat(honeypot): build Gemini deception engine with dynamic persona prompting and intent classification`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/deception.py`
 
 ### What is Inside:
@@ -63,7 +63,7 @@ STEPS = [
 ## 🔟 Commit 10: `honeypot/runtime.py` (Multi-Threaded Socket Listener Runtime)
 * **Commit Hash**: `{commit_hash}`
 * **Commit Message**: `feat(honeypot): build multi-threaded asynchronous socket listener runtime`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/runtime.py`
 
 ### What is Inside:
@@ -91,7 +91,7 @@ STEPS = [
 ## 1️⃣1️⃣ Commit 11: `honeypot/__main__.py` (Standalone Honeypot CLI)
 * **Commit Hash**: `{commit_hash}`
 * **Commit Message**: `feat(honeypot): add standalone CLI entrypoint for decoy runtime`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `honeypot/__main__.py`
 
 ### What is Inside:
@@ -113,7 +113,7 @@ STEPS = [
 ## 1️⃣2️⃣ Commit 12: `canary/manager.py` (Canary Tokens & Tripwire Manager)
 * **Commit Hash**: `{commit_hash}`
 * **Commit Message**: `feat(canary): implement CanaryManager for credential tokens and URL tripwires`
-* **Author**: Harkirat Singh
+* **Author**: Harini P
 * **Files**: `canary/__init__.py`, `canary/manager.py`
 
 ### What is Inside:
@@ -128,23 +128,23 @@ STEPS = [
     },
     {
         "step_num": 13,
-        "files": ["scripts/cybershield-health.ps1"],
+        "files": ["scripts/ScleraX-health.ps1"],
         "msg": "ops: add PowerShell health check probe for active decoy ports",
         "delay_after": 0,  # Final commit
         "brief": """---
 
-## 1️⃣3️⃣ Commit 13: `scripts/cybershield-health.ps1` (Operational Health Probe)
+## 1️⃣3️⃣ Commit 13: `scripts/ScleraX-health.ps1` (Operational Health Probe)
 * **Commit Hash**: `{commit_hash}`
 * **Commit Message**: `ops: add PowerShell health check probe for active decoy ports`
-* **Author**: Harkirat Singh
-* **Files**: `scripts/cybershield-health.ps1`
+* **Author**: Harini P
+* **Files**: `scripts/ScleraX-health.ps1`
 
 ### What is Inside:
 * Production PowerShell diagnostic script that tests and verifies active TCP socket bindings across all configured decoy ports (`2222`, `2323`, `8088`, `3306`).
 * Outputs colored status indicators (listening, banner responsive, connection latency) for quick pre-demo validation.
 
 ### 🎙️ How to Explain to a Judge:
-> *"In `scripts/cybershield-health.ps1`, we built an operational diagnostics probe. Before opening ports to production traffic, this automation script verifies that all decoy TCP sockets are healthy, banners are returning expected RFC responses, and no port conflicts exist on the host."*
+> *"In `scripts/ScleraX-health.ps1`, we built an operational diagnostics probe. Before opening ports to production traffic, this automation script verifies that all decoy TCP sockets are healthy, banners are returning expected RFC responses, and no port conflicts exist on the host."*
 """
     }
 ]
@@ -175,8 +175,8 @@ def run_pusher():
         
         commit_cmd = [
             "git", "-C", str(TARGET_DIR),
-            "-c", "user.name=Harkirat Singh",
-            "-c", "user.email=harkiratsingh96kk@gmail.com",
+            "-c", "user.name=Harini P",
+            "-c", "user.email=harini.pazhani03@gmail.com",
             "commit", "-m", step["msg"]
         ]
         subprocess.run(commit_cmd, env=env, check=True)

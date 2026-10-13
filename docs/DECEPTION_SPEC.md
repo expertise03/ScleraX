@@ -1,8 +1,8 @@
-# VALENS Autonomous Deception Mesh Specification
+# ScleraX Autonomous Deception Mesh Specification
 
 ## Overview
 
-VALENS provides an autonomous cyber deception and SOC platform designed to lure, isolate, and forensic-fingerprint adversaries before they can compromise authentic production workloads. This document details the technical specification of the deception mesh, telemetry structures, and containment mechanisms.
+ScleraX provides an autonomous cyber deception and SOC platform designed to lure, isolate, and forensic-fingerprint adversaries before they can compromise authentic production workloads. This document details the technical specification of the deception mesh, telemetry structures, and containment mechanisms.
 
 ---
 

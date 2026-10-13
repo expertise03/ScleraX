@@ -1,4 +1,4 @@
-"""VALENS deception grid.
+"""ScleraX deception grid.
 
 The package exposes an isolated five-service honeypot runtime.  It simulates
 services and records attacker interaction; it never executes received input.

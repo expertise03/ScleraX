@@ -27,12 +27,12 @@ class TestSyntheticTelemetry(unittest.TestCase):
             "action": "BLOCK_IP",
             "target_ip": "198.51.100.42",
             "duration_minutes": 1440,
-            "rule_origin": "valens_autonomous_deception",
+            "rule_origin": "ScleraX_autonomous_deception",
             "mitre_id": "T1190"
         }
         self.assertEqual(quarantine_action["action"], "BLOCK_IP")
         self.assertEqual(quarantine_action["duration_minutes"], 1440)
-        self.assertIn("valens", quarantine_action["rule_origin"])
+        self.assertIn("ScleraX", quarantine_action["rule_origin"])
 
     def test_geo_attribution_mapping(self):
         """Verify simulated geo-ip attribute resolver output."""

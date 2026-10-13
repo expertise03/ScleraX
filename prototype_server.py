@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-VALENS — Protected Asset Prototype Server
+ScleraX — Protected Asset Prototype Server
 ===========================================
 Hosts the client application prototypes on Port 8090:
 - Medicare.AI Healthcare Operations Portal (Default)
 - Apex Global Treasury Financial Portal
-- VALENS Prototype Showcase & Deception Grid Preview
+- ScleraX Prototype Showcase & Deception Grid Preview
 
-Seamlessly linked to the VALENS Autonomous SOC Engine running on Port 8050.
+Seamlessly linked to the ScleraX Autonomous SOC Engine running on Port 8050.
 """
 
 from pathlib import Path
@@ -23,8 +23,8 @@ TEMPLATES_ROOT = PROJECT_ROOT / "honeypot" / "templates"
 SOC_BACKEND_URL = "http://127.0.0.1:8050"
 
 app = FastAPI(
-    title="VALENS Protected Prototype Platform",
-    description="Customer Asset Prototypes protected by VALENS Autonomous WAF & Deception Mesh",
+    title="ScleraX Protected Prototype Platform",
+    description="Customer Asset Prototypes protected by ScleraX Autonomous WAF & Deception Mesh",
     version="1.0.0",
 )
 
@@ -67,11 +67,11 @@ def serve_finance_prototype():
 @app.get("/dashboard", include_in_schema=False)
 @app.get("/showcase", include_in_schema=False)
 def serve_dashboard_showcase():
-    """Serves the VALENS Prototype Landing and Architecture Showcase."""
+    """Serves the ScleraX Prototype Landing and Architecture Showcase."""
     index_file = DASHBOARD_ROOT / "index.html"
     if index_file.is_file():
         return FileResponse(index_file, media_type="text/html", headers=NO_CACHE_HEADERS)
-    return HTMLResponse("<h1>VALENS Platform Showcase</h1>", status_code=200)
+    return HTMLResponse("<h1>ScleraX Platform Showcase</h1>", status_code=200)
 
 
 @app.get("/console", include_in_schema=False)
@@ -84,7 +84,7 @@ def serve_prototype_console():
     console_file = DASHBOARD_ROOT / "console.html"
     if console_file.is_file():
         return FileResponse(console_file, media_type="text/html", headers=NO_CACHE_HEADERS)
-    return HTMLResponse("<h1>VALENS Prototype Console</h1>", status_code=200)
+    return HTMLResponse("<h1>ScleraX Prototype Console</h1>", status_code=200)
 
 
 @app.get("/api/v1/sentinel/agent.js", include_in_schema=False)
@@ -146,10 +146,10 @@ async def proxy_to_soc_backend(request: Request, path: str):
 if __name__ == "__main__":
     port = 8090
     print("=" * 60)
-    print("VALENS — Protected Customer Prototype Server")
+    print("ScleraX — Protected Customer Prototype Server")
     print(f"[*] Serving Medicare.AI Prototype on: http://127.0.0.1:{port}/")
     print(f"[*] Serving Apex Finance Prototype on: http://127.0.0.1:{port}/finance")
     print(f"[*] Serving Platform Showcase on: http://127.0.0.1:{port}/dashboard")
-    print(f"[*] Connected to VALENS SOC Backend at: {SOC_BACKEND_URL}")
+    print(f"[*] Connected to ScleraX SOC Backend at: {SOC_BACKEND_URL}")
     print("=" * 60)
     uvicorn.run("prototype_server:app", host="0.0.0.0", port=port, reload=True)
