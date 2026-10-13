@@ -215,7 +215,7 @@ flowchart LR
 6. **Access the SOC Command Center**:
    Open your browser to:
    ```
-   http://127.0.0.1:8000
+    http://127.0.0.1:8050/dashboard
    ```
 
 ---
